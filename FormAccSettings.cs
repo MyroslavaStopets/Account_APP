@@ -50,7 +50,7 @@ namespace Account_App
             mySQL += "UPDATE[AccountDB].[dbo].[User] SET Firstname = '" + txtFirstname.Text.Trim() + "', Lastname  = '" +
                 txtLastname.Text.Trim() + "' , Email  = '" + txtEmail.Text.Trim() + "', Rol = '" + comboBoxRole.Text + "' WHERE UserID = " + this.user_id;
             DataTable userData = Server_connection.executeSQL(mySQL);
-            MessageBox.("Unpdated successfuly");
+            MessageBox.Show("Updated successfuly");
             FormHome fh = new FormHome();
             fh.ShowDialog();
         }

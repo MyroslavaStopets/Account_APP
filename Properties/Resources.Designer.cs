@@ -59,5 +59,15 @@ namespace Account_App.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap internet_banking_vector_6568278 {
+            get {
+                object obj = ResourceManager.GetObject("internet-banking-vector-6568278", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
