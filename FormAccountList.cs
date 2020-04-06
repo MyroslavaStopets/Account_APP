@@ -131,7 +131,7 @@ namespace Account_App
         private void linkAccSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            FormAccSettings fas = new FormAccSettings();
+            FormAccSettings fas = new FormAccSettings(user_id);
             fas.ShowDialog();
         }
     }
