@@ -132,8 +132,9 @@ namespace Account_App
                 {
                     sql_conn.Open();
                     DataGridViewRow dgvRow = dataGridViewBankAcc.CurrentRow;
-                    SqlCommand sql_command = new SqlCommand("AccountAddOrEdit", sql_conn);
+                    SqlCommand sql_command = new SqlCommand("AddOrEditAcc", sql_conn);
                     sql_command.CommandType = CommandType.StoredProcedure;
+                    sql_command.Parameters.AddWithValue("@UserID", Convert.ToInt32(this.user_id));
                     sql_command.Parameters.AddWithValue("@AccNumber", Convert.ToInt32(dgvRow.Cells["AccNumber"].Value));
                     sql_command.Parameters.AddWithValue("@Firstname", dgvRow.Cells["Firstname"].Value == DBNull.Value ? "" : dgvRow.Cells["Firstname"].Value.ToString());
                     sql_command.Parameters.AddWithValue("@Lastname", dgvRow.Cells["Lastname"].Value == DBNull.Value ? "" : dgvRow.Cells["Lastname"].Value.ToString());
