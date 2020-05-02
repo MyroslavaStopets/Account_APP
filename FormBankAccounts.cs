@@ -35,7 +35,7 @@ namespace Account_App
             }
             else
             {
-                MessageBox.Show("This user does not have an account");
+                MessageBox.Show("This user does not have an accounts");
             }
         }
         private void label1_Click(object sender, EventArgs e)
@@ -159,6 +159,13 @@ namespace Account_App
                 sql_command.Parameters.AddWithValue("@AccNumber", Convert.ToInt32(dataGridViewBankAcc.CurrentRow.Cells["AccNumber"].Value));
                 sql_command.ExecuteNonQuery();
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormHome fh = new FormHome();
+            fh.Show();
         }
     }
 }

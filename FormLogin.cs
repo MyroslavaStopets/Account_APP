@@ -32,11 +32,17 @@ namespace Account_App
                     txtEmail.Clear();
                     txtPassword.Clear();
                     PasswordCheckBox.Checked = false;
-                    if (userData.Rows[0][0].ToString() == "Client")
+                    if (userData.Rows[0][5].ToString() == "Client")
                     {
                         this.Hide();
                         FormAccountList fal = new FormAccountList(userData.Rows[0][0].ToString());
                         fal.ShowDialog();
+                    }
+                    if (userData.Rows[0][5].ToString() == "Admin")
+                    {
+                        this.Hide();
+                        FormUsersList ul = new FormUsersList(userData.Rows[0][0].ToString());
+                        ul.ShowDialog();
                     }
                     else
                     {

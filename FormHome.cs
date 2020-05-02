@@ -9,17 +9,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Account_App
 {
     public partial class FormHome : Form
     {
+        public FormHome(string splash)
+        {
+            if (splash == "yes")
+            {
+                Thread t = new Thread(new ThreadStart(StartForm));
+                t.Start();
+                Thread.Sleep(7000);
+                InitializeComponent();
+                t.Abort();
+            }
+        }
         public FormHome()
         {
-            Thread t = new Thread(new ThreadStart(StartForm));
-            t.Start();
-            Thread.Sleep(7000);
             InitializeComponent();
-            t.Abort();
         }
         public void StartForm()
         {

@@ -51,8 +51,15 @@ namespace Account_App
                 txtLastname.Text.Trim() + "' , Email  = '" + txtEmail.Text.Trim() + "', Rol = '" + comboBoxRole.Text + "' WHERE UserID = " + this.user_id;
             DataTable userData = Server_connection.executeSQL(mySQL);
             MessageBox.Show("Updated successfuly");
-            FormHome fh = new FormHome();
-            fh.ShowDialog();
+            mySQL = string.Empty;
+            mySQL += "SELECT * FROM [AccountDB].[dbo].[User] ";
+            mySQL += "WHERE Email = '" + txtEmail.Text.Trim() + "'";
+            userData = Server_connection.executeSQL(mySQL);
+            this.Hide();
+            FormBankAccounts fba = new FormBankAccounts(userData.Rows[0][0].ToString());
+            fba.ShowDialog();
+            //FormHome fh = new FormHome();
+            //fh.Show();
         }
     }
 }

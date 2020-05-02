@@ -94,9 +94,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(474, 37);
+            this.label2.Size = new System.Drawing.Size(385, 37);
             this.label2.TabIndex = 3;
-            this.label2.Text = "For registration fill in this form";
+            this.label2.Text = "Registration of new user";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -185,7 +185,8 @@
             this.comboBoxRole.FormattingEnabled = true;
             this.comboBoxRole.Items.AddRange(new object[] {
             "Bank",
-            "Client"});
+            "Client",
+            "Admin"});
             this.comboBoxRole.Location = new System.Drawing.Point(254, 340);
             this.comboBoxRole.Name = "comboBoxRole";
             this.comboBoxRole.Size = new System.Drawing.Size(223, 32);
@@ -221,7 +222,7 @@
             this.txtConfirmPassword.TabIndex = 8;
             this.txtConfirmPassword.UseSystemPasswordChar = true;
             this.txtConfirmPassword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPassword_Validating);
+            this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxConfirmPassword_Validating);
             // 
             // lblConfirmPassword
             // 

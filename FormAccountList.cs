@@ -134,5 +134,10 @@ namespace Account_App
             FormAccSettings fas = new FormAccSettings(user_id);
             fas.ShowDialog();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

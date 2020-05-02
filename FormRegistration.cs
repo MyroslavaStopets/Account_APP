@@ -13,8 +13,18 @@ namespace Account_App
     public partial class FormRegistration : Form
     {
         User model =  new User();
+        private string admin;
+        private string user_id;
+
         public FormRegistration()
         {
+            InitializeComponent();
+        }
+
+        public FormRegistration(string a, string id)
+        {
+            this.admin = a;
+            this.user_id = id;
             InitializeComponent();
         }
 
@@ -47,9 +57,18 @@ namespace Account_App
                     db.SaveChanges();
             }
             MessageBox.Show("Registrated successfully");
-            this.Hide();
-            FormHome f = new FormHome();
-            f.Show();
+            if (admin == null)
+            {
+                this.Hide();
+                FormHome f = new FormHome();
+                f.Show();
+            }
+            else
+            {
+                this.Hide();
+                FormUsersList ful = new FormUsersList(user_id);
+                ful.Show();
+            }
         }
 
         private void textBoxName_Validating(object sender, CancelEventArgs e)
@@ -102,21 +121,14 @@ namespace Account_App
                 errorProviderEmail.SetError(txtEmail, "Email should match to template text@text.text ");
             }
         }
+
         private void textBoxPassword_Validating(object sender, CancelEventArgs e)
         {
             Valid_func_delegate delegate_func = Helpers.Valid_password;
             if (validation(delegate_func, model.Pasword, txtPassword.Text.Trim()))
             {
-                if (txtPassword.Text.Trim() == txtConfirmPassword.Text.Trim())
-                {
-                    e.Cancel = false;
-                    errorProviderPassword.SetError(txtPassword, "");
-                }
-                else
-                {
-                    e.Cancel = true;
-                    errorProviderPassword.SetError(txtPassword, "Two passwords does not matches");
-                }
+                e.Cancel = false;
+                errorProviderPassword.SetError(txtPassword, "");
             }
             else
             {
@@ -151,9 +163,24 @@ namespace Account_App
             }
         }
 
-        private void FormRegistration_Load(object sender, EventArgs e)
-        {
+        private void FormRegistration_Load(object sender, EventArgs e){}
 
+        private void textBoxConfirmPassword_Validating(object sender, CancelEventArgs e)
+        {
+            Valid_func_delegate delegate_func = Helpers.Valid_password;
+            if (validation(delegate_func, model.Pasword, txtPassword.Text.Trim()))
+            {
+                if (txtPassword.Text.Trim() == txtConfirmPassword.Text.Trim())
+                {
+                    e.Cancel = false;
+                    errorProviderPassword.SetError(txtPassword, "");
+                }
+                else
+                {
+                    e.Cancel = true;
+                    errorProviderPassword.SetError(txtPassword, "Two passwords does not matches");
+                }
+            }
         }
     }
 }
