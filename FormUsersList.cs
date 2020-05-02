@@ -25,7 +25,7 @@ namespace Account_App
             mySQL += "SELECT  [AccountDB].[dbo].[User].UserID, [AccountDB].[dbo].[User].Firstname," +
                 " [AccountDB].[dbo].[User].Lastname, [AccountDB].[dbo].[User].Email, [AccountDB].[dbo].[User].Rol," +
                 " [AccountDB].[dbo].[User].STAT FROM[AccountDB].[dbo].[User] WHERE[AccountDB].[dbo].[User].UserID !=";
-            mySQL += user_id;
+            mySQL += user_id + " AND [AccountDB].[dbo].[User].Rol != 'Admin'";
             DataTable userData = Server_connection.executeSQL(mySQL);
             if (userData.Rows.Count > 0)
             {
