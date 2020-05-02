@@ -54,27 +54,46 @@ namespace Account_App
         private void dataGridViewUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string mySQL = string.Empty;
-            mySQL += "SELECT[AccountDB].[dbo].[Accounts].AccNumber, [AccountDB].[dbo].[Accounts].Firstname,[AccountDB].[dbo].[Accounts].Lastname,[AccountDB].[dbo].[Accounts].Summ, " +
-                " [AccountDB].[dbo].[Accounts].Last_year FROM[AccountDB].[dbo].[Accounts] INNER JOIN[AccountDB].[dbo].[Usesr_Accounts]" +
-                " ON[AccountDB].[dbo].[Accounts].AccNumber = [AccountDB].[dbo].[Usesr_Accounts].AccNumber WHERE[AccountDB].[dbo].[Usesr_Accounts].UserID = ";
-            mySQL += dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value;
-            DataTable userData = Server_connection.executeSQL(mySQL);
-            if (userData.Rows.Count > 0)
+            if (dataGridViewUsers.CurrentCell.ColumnIndex == 5)
             {
-                if ((String)dataGridViewUsers[4, dataGridViewUsers.CurrentCell.RowIndex].Value == "Client")
+                mySQL += "UPDATE [AccountDB].[dbo].[User] SET STAT = '";
+                if ((String)dataGridViewUsers[5, dataGridViewUsers.CurrentCell.RowIndex].Value == "Active")
                 {
-                    FormAccountList fal = new FormAccountList(dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value.ToString());
-                    fal.ShowDialog();
+                    mySQL += "Inactive' WHERE UserID = ";
+                    dataGridViewUsers.CurrentCell.Value = "Inactive";
                 }
-                if ((String)dataGridViewUsers[4, dataGridViewUsers.CurrentCell.RowIndex].Value == "Bank")
+                else 
                 {
-                    FormBankAccounts fba = new FormBankAccounts(dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value.ToString());
-                    fba.ShowDialog();
+                    mySQL += "Active' WHERE UserID = ";
+                    dataGridViewUsers.CurrentCell.Value = "Active";
                 }
+                mySQL += dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value;
+                DataTable userData = Server_connection.executeSQL(mySQL);
             }
             else
             {
-                MessageBox.Show("This user doesn't have any account");
+                mySQL += "SELECT[AccountDB].[dbo].[Accounts].AccNumber, [AccountDB].[dbo].[Accounts].Firstname,[AccountDB].[dbo].[Accounts].Lastname,[AccountDB].[dbo].[Accounts].Summ, " +
+               " [AccountDB].[dbo].[Accounts].Last_year FROM[AccountDB].[dbo].[Accounts] INNER JOIN[AccountDB].[dbo].[Usesr_Accounts]" +
+               " ON[AccountDB].[dbo].[Accounts].AccNumber = [AccountDB].[dbo].[Usesr_Accounts].AccNumber WHERE[AccountDB].[dbo].[Usesr_Accounts].UserID = ";
+                mySQL += dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value;
+                DataTable userData = Server_connection.executeSQL(mySQL);
+                if (userData.Rows.Count > 0)
+                {
+                    if ((String)dataGridViewUsers[4, dataGridViewUsers.CurrentCell.RowIndex].Value == "Client")
+                    {
+                        FormAccountList fal = new FormAccountList(dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value.ToString());
+                        fal.ShowDialog();
+                    }
+                    if ((String)dataGridViewUsers[4, dataGridViewUsers.CurrentCell.RowIndex].Value == "Bank")
+                    {
+                        FormBankAccounts fba = new FormBankAccounts(dataGridViewUsers[0, dataGridViewUsers.CurrentCell.RowIndex].Value.ToString());
+                        fba.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("This user doesn't have any account");
+                }
             }
         }
 

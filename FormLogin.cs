@@ -32,25 +32,31 @@ namespace Account_App
                     txtEmail.Clear();
                     txtPassword.Clear();
                     PasswordCheckBox.Checked = false;
-                    if (userData.Rows[0][5].ToString() == "Client")
+                    if (userData.Rows[0][6].ToString() == "Inactive")
                     {
-                        this.Hide();
-                        FormAccountList fal = new FormAccountList(userData.Rows[0][0].ToString());
-                        fal.ShowDialog();
-                    }
-                    if (userData.Rows[0][5].ToString() == "Admin")
-                    {
-                        this.Hide();
-                        FormUsersList ul = new FormUsersList(userData.Rows[0][0].ToString());
-                        ul.ShowDialog();
+                        MessageBox.Show("This user is bloked by administartor");
                     }
                     else
                     {
-                        this.Hide();
-                        FormBankAccounts fba = new FormBankAccounts(userData.Rows[0][0].ToString());
-                        fba.ShowDialog();
+                        if (userData.Rows[0][5].ToString() == "Client")
+                        {
+                            this.Hide();
+                            FormAccountList fal = new FormAccountList(userData.Rows[0][0].ToString());
+                            fal.ShowDialog();
+                        }
+                        if (userData.Rows[0][5].ToString() == "Admin")
+                        {
+                            this.Hide();
+                            FormUsersList ul = new FormUsersList(userData.Rows[0][0].ToString());
+                            ul.ShowDialog();
+                        }
+                        if (userData.Rows[0][5].ToString() == "Bank")
+                        {
+                            this.Hide();
+                            FormBankAccounts fba = new FormBankAccounts(userData.Rows[0][0].ToString());
+                            fba.ShowDialog();
+                        }
                     }
-
                 }
                 else
                 {
